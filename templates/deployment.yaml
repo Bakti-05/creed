@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    {{- include "myapp.labels" . | nindent 4 }}
+    {{- include "creed.labels" . | nindent 4 }}
   name: {{ default $.Release.Name $.Values.name }}-deployment
 spec:
   replicas: {{ $.Values.replicas }}
@@ -13,17 +13,19 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      {{- include "myapp.labels" . | nindent 6 }}
+      {{- include "creed.labels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "myapp.labels" . | nindent 8 }}
+        {{- include "creed.labels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ default $.Release.Name $.Values.name }}-sa
       containers:
       - image: {{ $.Values.image.repository }}:{{ $.Values.image.tag }}
         name: creed
         imagePullPolicy: {{ $.Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ $.Values.service.targetPort }}
         resources:
           requests:
             memory: {{ $.Values.resources.requests.memory }}
