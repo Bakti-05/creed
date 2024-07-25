@@ -17,10 +17,10 @@ rollingUpdate:
   maxUnavailable: 0
 
 # image configurations
-image:
-  repository: balamaru/myapp
-  tag: 1.0
-  pullPolicy: IfNotPresent
+# image:
+#   repository: balamaru/myapp
+#   tag: 1.0
+#   pullPolicy: IfNotPresent
 
 # resources configurations
 resources:

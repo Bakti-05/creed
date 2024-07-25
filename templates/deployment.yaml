@@ -21,9 +21,9 @@ spec:
     spec:
       serviceAccountName: {{ default $.Release.Name $.Values.name }}-sa
       containers:
-      - image: {{ $.Values.image.repository }}:{{ $.Values.image.tag }}
+      - image: balamaru/myapp:1.0
         name: creed
-        imagePullPolicy: {{ $.Values.image.pullPolicy }}
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: {{ $.Values.service.targetPort }}
         resources:
