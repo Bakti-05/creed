@@ -6,7 +6,7 @@ version: 1.0.0
 appVersion: "1.0.0"
 sources:
   - https://github.com/Bakti-05/creed.git
-maintainers: # (optional)
+maintainers:
   - name: Balamaru
     email: balamaru@creed.com
     url: https://gitlab.com/balamaru
