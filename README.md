@@ -4,6 +4,7 @@ Helm adalah package manager untuk kubernetes, helm berfungsi selayaknya *apt* di
 ## Prequisite
 Untuk membuat Helm, beberapa hal yang diperlukan :
 - Kubernetes Cluster (Saat membuat Chart Helm ini author menggunakan Kubernetes Cluster versi v1.27.7)
+- loadBalancer enable di Kubernetes Cluster
 - Helm yang terinstall (Saat membuat Chart Helm ini author menggunakan Helm version v3.15.3),
   atau jika ingin menginstall helm, dapat mengeksekusi perintah ini :
   ```bash
