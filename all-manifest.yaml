@@ -1,0 +1,61 @@
+# myapp serviceaccount
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: myapp
+  name: myapp-sa
+
+---
+# myapp deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myapp
+  name: myapp-deployment
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      serviceAccountName: myapp-sa
+      containers:
+      - image: balamaru/myapp:1.0
+        name: myapp
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+---
+# myapp service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: myapp
+  name: myapp-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: myapp
+  type: LoadBalancer
